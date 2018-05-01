@@ -36,7 +36,7 @@ class CuteApi(object):
 
     def post(self, uri, params):
         url = "%s%s" % (self.host, uri)
-        ret = requests.post(url, json=params)
+        ret = requests.post(url, json=params, verify=False)
         return ret
 
     def get(self, uri, params):
