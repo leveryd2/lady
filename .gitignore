@@ -1,0 +1,21 @@
+# mac
+.idea
+.idea/workspace.xml
+.DS_Store
+
+# cute
+*.log
+nohup.out
+
+# pipenv
+#Pipfile.lock
+
+# Python:
+*.py[cod]
+*.pyc
+*.so
+*.egg
+*.egg-info
+.coverage
+test/.cache/
+build
