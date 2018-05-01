@@ -1,5 +1,6 @@
 # coding:utf-8
 import json
+from IPy import IP
 
 from libnmap.parser import NmapParser
 from libnmap.process import NmapProcess
@@ -23,6 +24,14 @@ def collect_service_info(jsondata):
     target = jsondata.get("target", "")
     options = jsondata.get("options", global_options)
     log_states = jsondata.get("log_states", global_log_states)
+
+    # 忽略内网IP
+    ip = IP(target)
+    if ip.iptype() == "PRIVATE":
+        return "内网IP"
+    if target.strip() == "":
+        return "无IP"
+
     nmap_proc = NmapProcess(targets=str(target), options=options, safe_mode=False)
     nmap_proc.sudo_run_background()  # nmap -O 参数需要root权限
 

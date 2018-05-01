@@ -11,3 +11,11 @@ class TasksTestCase(unittest.TestCase):
         jsondata = json.loads(result)
         self.assertTrue(len(jsondata) > 0)
 
+    def test_collect_service_info_full(self):
+        """
+        测试默认扫描参数是否可用
+        :return:
+        """
+        result = collect_service_info.delay('{"target":"127.0.0.1"}').get()
+        jsondata = json.loads(result)
+        self.assertTrue(len(jsondata) > 0)

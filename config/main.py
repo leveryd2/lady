@@ -28,10 +28,7 @@ if env == "prod":
         },
     }
     proxies = {}
-    host = "https://139.199.206.110"
-    header = {
-        "Host": "cute.leveryd.top",
-    }
+    host = "https://cute.leveryd.top"
 else:
     debug = False
     if debug:
@@ -41,7 +38,6 @@ else:
     else:
         proxies = {}
         host = "http://127.0.0.1:5000"
-        header = {}
 
     # 已有的插件需要在这里注册
     plugins_map = {
