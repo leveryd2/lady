@@ -36,7 +36,7 @@ class CuteApi(object):
 
     def post(self, uri, params):
         url = "%s%s" % (self.host, uri)
-        ret = requests.post(url, json=params)
+        ret = requests.post(url, json=params, headers=header)
         return ret
 
     def get(self, uri, params):
@@ -48,7 +48,7 @@ class CuteApi(object):
         """
         params = self._convert_dict(params)
         url = "%s%s?%s" % (self.host, uri, params)
-        ret = requests.get(url, verify=False)
+        ret = requests.get(url, verify=False, headers=header)
         jsondata = json.loads(ret.text)
         return jsondata["rows"]
 
