@@ -24,7 +24,7 @@ def collect_service_info(jsondata):
     options = jsondata.get("options", global_options)
     log_states = jsondata.get("log_states", global_log_states)
     nmap_proc = NmapProcess(targets=str(target), options=options, safe_mode=False)
-    nmap_proc.run_background()  # sudo_run_background
+    nmap_proc.sudo_run_background()  # nmap -O 参数需要root权限
 
     while nmap_proc.is_running():
         pass

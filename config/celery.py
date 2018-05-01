@@ -3,21 +3,24 @@
 import os
 env = os.getenv("lady_env")
 
+
+class BaseConfig(object):
+    main = "tasks"
+    broker_url = "amqp://"
+    result_backend = "rpc://"
+    include = ['tasks']
+    timezone = 'Asia/Shanghai'
+    result_expires = 3600
+
+
 # 默认开发环境
 if env == "prod":
-    class CeleryConfig(object):
-        main = "tasks"
+    class CeleryConfig(BaseConfig):
         broker_url = "amqp://rabbituser1:xjifajijiwx@139.199.206.110/"
         result_backend = "rpc://"
-        include = ['tasks']
-        result_expires = 3600
 else:
-    class CeleryConfig(object):
-        main = "tasks"
-        broker_url = "amqp://"
-        result_backend = "rpc://"
-        include = ['tasks']
-        result_expires = 3600
+    class CeleryConfig(BaseConfig):
+        pass
 
 
 # scan option
