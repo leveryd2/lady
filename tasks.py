@@ -4,7 +4,7 @@ import json
 from libnmap.parser import NmapParser
 from libnmap.process import NmapProcess
 
-from celery import app
+from app import app
 from utils.common import CuteApi
 from config.celery import global_options, global_log_states
 
@@ -18,7 +18,7 @@ def collect_service_info(jsondata):
     :param jsondata:
     :return:
     """
-
+    ret = []
     jsondata = json.loads(jsondata)
     target = jsondata.get("target", "")
     options = jsondata.get("options", global_options)
@@ -49,3 +49,5 @@ def collect_service_info(jsondata):
 
                     # HTTP API保存到远端服务器
                     CuteApi().post("/api/info/hostserviceinfo/add", service)
+                    ret.append(service)
+    return json.dumps(ret)
