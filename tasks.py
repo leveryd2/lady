@@ -1,5 +1,6 @@
 # coding:utf-8
 import json
+import time
 from IPy import IP
 
 from libnmap.parser import NmapParser
@@ -36,7 +37,7 @@ def collect_service_info(jsondata):
     nmap_proc.sudo_run_background()  # nmap -O 参数需要root权限
 
     while nmap_proc.is_running():
-        pass
+        time.sleep(10)
     if nmap_proc.is_successful():
         nmap_report = NmapParser.parse(nmap_proc.stdout)
         # 开始处理扫描结果
