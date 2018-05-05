@@ -19,5 +19,28 @@ flower --port=9999 --broker="amqp://"
 celery -A app worker -l info
 ```
 
-## 部署
-线上环境使用supervisord来管理ceelry进程，配置见config/supervisord.conf文件
+## 线上部署
+### worker
+1. 创建项目目录，并pull代码
+```bash
+mkdir -p /data/lady
+cd /data/lady
+git clone git@gitee.com:looklook/lady.git
+```
+1. 安装supervisor，配置见config/supervisord.conf文件
+```bash
+apt-get install -y supervisord-server
+```
+2. 安装nmap
+```bash
+apt-get install -y nmap
+```
+3. 安装项目依赖
+```bash
+pip2 install -r requrements.txt
+```
+4. 绑定hosts
+```bash
+139.199.206.110 cute.leveryd.top
+```
+5. supervisor重启任务

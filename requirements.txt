@@ -1,4 +1,5 @@
-celery==4.1.0
 python-libnmap
 requests
 IPy
+requests==2.11.1
+celery==4.1.0
