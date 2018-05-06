@@ -5,7 +5,6 @@ ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # apt and pip mirrors
-
 RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list \
     && mkdir -p ~/.pip \
     && echo "[global]" > ~/.pip/pip.conf \
@@ -13,10 +12,9 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list \
     && echo "index-url = https://pypi.tuna.tsinghua.edu.cn/simple" >> ~/.pip/pip.conf
 
 # install requirements
-
 RUN set -x \
     && apt-get update \
-    && apt-get install -y python-dev python-pip nmap
+    && apt-get install -y python-dev python-pip nmap supervisor
 
 
 # install this project
@@ -26,16 +24,10 @@ COPY . /data/lady
 RUN set -x \
     && pip install -r /data/lady/requirements.txt
 
-# RUN set -x \
-#     && chmod a+x /opt/xunfeng/masscan/linux_64/masscan \
-#     && chmod a+x /opt/xunfeng/dockerconf/start.sh
-
+# start app
 WORKDIR /data/lady
 
-# VOLUME ["/data"]
+RUN chmod a+x /data/lady/config/docker_start.sh \
+    && rm -rf /var/lib/apt/lists
 
-# ENTRYPOINT ["/opt/xunfeng/dockerconf/start.sh"]
-
-EXPOSE 80
-
-CMD ["/usr/bin/tail", "-f", "/dev/null"]
+CMD ["/data/lady/config/docker_start.sh"]
