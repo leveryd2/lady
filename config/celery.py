@@ -18,6 +18,7 @@ if env == "prod":
     class CeleryConfig(BaseConfig):
         broker_url = "amqp://rabbituser1:xjifajijiwx@139.199.206.110/"
         result_backend = "rpc://"
+        worker_max_tasks_per_child = 4
 else:
     class CeleryConfig(BaseConfig):
         pass
