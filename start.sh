@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
-project_dir = "/data/lady"
-# 创建项目目录
-mkdir -p $project_dir
-
 # 安装supervisor，配置见config/supervisord.conf文件
 # 安装nmap
-apt-get update && apt-get install -y python-pip nmap supervisor
+# 安装git
+apt-get update && apt-get install -y python-pip nmap supervisor git
+yum update && yum install -y python-pip nmap supervisor git
+pip2 install --upgrade pip
+
+project_dir = "/data/lady"
+
+# 创建项目目录
+mkdir -p $project_dir
+cd $project_dir
+
+# 拷贝项目
+git clone https://github.com/leveryd/lady
 
 # 安装项目依赖
 pip2 install -r $project_dir/requrements.txt
